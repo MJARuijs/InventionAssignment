@@ -51,7 +51,7 @@ objIndex = 2
 objects = [objects01,objects02,objects03][objIndex]
 
 def main():
-    dataDir = '/field/'  #'/data/'
+    dataDir = '/../../res/data/'  #'/data/'
     fileName = "*.json"
     # fileName = "*07-*"  # "*2017-04-05.txt"
     numHome = 2  # Use everything is 'ALL'; otherwise integer
