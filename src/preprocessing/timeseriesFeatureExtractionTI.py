@@ -47,7 +47,8 @@ objects03 = { '247189e61802': 'Kitchen Chair',
               '247189e6c680': 'Tablet'
 }
 
-objIndex = 2
+objIndex = 0
+
 objects = [objects01,objects02,objects03][objIndex]
 
 def main():
