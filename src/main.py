@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     min_count = min(min_counts)
 
-    time_array = np.linspace(0, min_count * (delay / 1000), num=min_count)
+    time_array = np.linspace(0, min_count * (delay / 1000.0), num=min_count)
 
     for d in data:
         Plotter.plot(time_array, d[0][0:min_count], 'Acceleration ' + d[3])
