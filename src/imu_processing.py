@@ -2,6 +2,9 @@ import numpy as np
 import scipy
 
 
+epsilon = 0.5
+
+
 def rotation_matrix(alpha, beta, gamma):
     return np.ndarray([[np.cos(alpha) * np.cos(beta),
                         np.sin(alpha) * np.cos(beta),
@@ -25,7 +28,12 @@ def project(v, n):
     return v - np.dot((np.dot(v, n) / np.linalg.norm(n) ** 2), n)
 
 
-def calculate_gravity(acc):
-    diff = []
+def is_stable(acc):
+    first = acc[0]
     for i in range(1, len(acc), 1):
-        diff[i] = acc[i] - acc[i - 1]
+        diff = np.linalg.norm(scipy.spacial.distance.euclidian(acc[i], first))
+        if diff < epsilon:
+            return False
+    return True
+
+
