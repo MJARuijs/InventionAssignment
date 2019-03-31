@@ -1,30 +1,26 @@
-import data_reader
-import pylab as pl
+import FileReader
+import numpy as np
+import Plotter
+
 
 if __name__ == '__main__':
-    data_dir = '/../res/data/'
-    data = data_reader.read_file(data_dir)
+    all_data = FileReader.read_files('/../res/data/', 'throw*.txt')
 
-    devices = {}
+    min_counts = []
+    data = []
+    delay = 0
 
-    for measurement in data:
-        device_name = measurement[0]
-        measurement_type = measurement[2]
+    for file_data in all_data:
+        time_array = np.linspace(0, file_data[1] * (file_data[0] / 1000), num=file_data[1])
+        min_counts.append(file_data[1])
+        data.append([file_data[2], file_data[3], file_data[4], file_data[5]])
+        delay = file_data[0]
 
-        if device_name not in devices:
-            devices[device_name] = {}
-            devices[device_name][measurement_type] = [measurement[1], measurement[3:]]
-        elif measurement_type not in devices[device_name]:
-            devices[device_name][measurement_type] = [measurement[1], measurement[3:]]
-        else:
-            devices[device_name][measurement_type].append([measurement[1], measurement[3:]])
+    min_count = min(min_counts)
 
-    for device_name, measurements in devices.items():
-        print(device_name)
+    time_array = np.linspace(0, min_count * (delay / 1000), num=min_count)
 
-        for measurement_name, measurement in measurements.items():
-            print(measurement_name)
-            print(measurement)
-            print()
-        print()
-
+    for d in data:
+        Plotter.plot(time_array, d[0][0:min_count], 'Acceleration ' + d[3])
+        Plotter.plot(time_array, d[1][0:min_count], 'Magnetometer ' + d[3])
+        Plotter.plot(time_array, d[2][0:min_count], 'Gyroscope ' + d[3])
