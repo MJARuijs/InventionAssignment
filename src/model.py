@@ -31,12 +31,6 @@ def main(data):
     for i in range( wl, len(data), 1):
         acc, gyro, mag = get_window(data, i, wl)
 
-def get_projection(accN, magN):
-    down = accN - np.dot((np.dot(accN, magN) / np.linalg.norm(magN)**2), magN)
-    down_len = np.linalg.norm(down)
-    if down_len > 9 and down_len < 11:
-        return down;
-
 
 a, g, m = get_window(test_data, 7, 3)
 
