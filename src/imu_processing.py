@@ -23,3 +23,9 @@ def remove_gravity(acc, grav, gyro, t):
 
 def project(v, n):
     return v - np.dot((np.dot(v, n) / np.linalg.norm(n) ** 2), n)
+
+
+def calculate_gravity(acc):
+    diff = []
+    for i in range(1, len(acc), 1):
+        diff[i] = acc[i] - acc[i - 1]

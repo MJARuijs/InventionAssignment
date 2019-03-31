@@ -4,7 +4,7 @@ import Plotter
 
 
 if __name__ == '__main__':
-    all_data = FileReader.read_files('/../res/data/', 'throw*.txt')
+    all_data = FileReader.read_files('/../res/data/', 'throw_0.txt')
 
     min_counts = []
     data = []

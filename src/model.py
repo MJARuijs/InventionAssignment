@@ -16,6 +16,7 @@ wl = 10;
 base_down_dir = [1, 0, 0]
 base_n = 0
 
+
 def get_window(data, current, window_length):
     window = data[current - window_length : current]
     acc = window[:,0:3]
@@ -23,8 +24,6 @@ def get_window(data, current, window_length):
     mag = window[:,6:9]
     return acc, gyro, mag
 
-def get_direction_vector():
-    return
 
 def main(data):
     curr_down = base_down_dir
