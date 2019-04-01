@@ -17,11 +17,11 @@ def rotation_matrix(alpha, beta, gamma):
                         np.cos(beta) * np.cos(gamma)]])
 
 
-def remove_gravity(acc, grav, gyro, t):
+def update_gravity(grav, gyro, t):
     t_step = t / len(gyro)
     for i in range(len(gyro)):
         grav = grav * rotation_matrix(gyro[i, 0] * t_step, gyro[i, 1] * t_step, gyro[i, 2] * t_step)
-    return acc - grav
+    return grav
 
 
 def project(v, n):
@@ -29,9 +29,9 @@ def project(v, n):
 
 
 def is_stable(acc):
-    first = acc[0]
+    mu = sum(acc) / len(acc)
     for i in range(1, len(acc), 1):
-        diff = np.linalg.norm(scipy.spacial.distance.euclidian(acc[i], first))
+        diff = np.linalg.norm(scipy.spacial.distance.euclidian(acc[i], mean))
         if diff < epsilon:
             return False
     return True
