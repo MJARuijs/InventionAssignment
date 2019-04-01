@@ -31,7 +31,7 @@ def project(v, n):
 def is_stable(acc):
     mu = sum(acc) / len(acc)
     for i in range(1, len(acc), 1):
-        diff = np.linalg.norm(scipy.spacial.distance.euclidian(acc[i], mean))
+        diff = np.linalg.norm(scipy.spacial.distance.euclidian(acc[i], mu))
         if diff < epsilon:
             return False
     return True
