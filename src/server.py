@@ -25,9 +25,10 @@ if __name__ == '__main__':
     try:
         while True:
             client, address = s.accept()
-
-            message_bytes = client.recv(4)
+            message_bytes = bytearray(4)
+            client.recv_into(message_bytes, 4)
             size = 0
+
             size += message_bytes[3] << 24
             size += message_bytes[2] << 16
             size += message_bytes[1] << 8
@@ -42,7 +43,6 @@ if __name__ == '__main__':
 
             try:
                 decoded_data = data.decode('utf-8')
-
                 if 'START STREAM' in decoded_data:
                     start_index = decoded_data.index('D') + 1
                     delay = decoded_data[start_index: len(decoded_data)]
@@ -121,7 +121,7 @@ if __name__ == '__main__':
                         magnetometer_data = magnetometer_data[0:min_count]
                         gyroscope_data = gyroscope_data[0:min_count]
 
-                        time_array = np.linspace(0, min_count * (delay / 1000), num=min_count)
+                        time_array = np.linspace(0, min_count * (delay / 1000.0), num=min_count)
 
                         if file_name is not '':
                             file_data = ''

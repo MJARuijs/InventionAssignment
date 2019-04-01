@@ -1,4 +1,4 @@
-import matplotlib.pyplot as pl
+import pylab as pl
 
 
 def plot(xs, ys, title):
