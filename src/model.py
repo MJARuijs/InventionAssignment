@@ -44,14 +44,14 @@ def tumble_score(gyro):
 # param until - the point in the data at which the algorithm should stop analysing
 # return - a list containing the score for each point in the data
 def process(data, window_len, until):
-    res = []
+    res = np.zeros(until)
     # initial zero padding
     for i in range(window_len):
-        res.append(0)
+        res[i] = 0
     # determining the score for each window
     for i in range(window_len, until, 1):
         acc, gyro, mag = get_window(data, i, window_len)
-        res.append(free_fall_score(acc) * tumble_score(gyro))
+        res[i] = free_fall_score(acc) * tumble_score(gyro)
     return res
 
 
