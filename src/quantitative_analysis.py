@@ -84,3 +84,7 @@ if __name__ == '__main__':
                 res[key] = 'FP'
                 FP_count += 1
     print "TP: ", TP_count, " FP: ",  FP_count, " TN: ", TN_count, " FN: ", FN_count
+
+    for key, value in res.items():
+        if value == 'FP' or value == 'FN':
+            print key, ' ', value
