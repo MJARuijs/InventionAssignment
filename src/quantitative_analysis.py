@@ -39,11 +39,11 @@ truth = {
 
 if __name__ == '__main__':
 
-    all_data = FileReader.read_files('/../res/data/', '*.txt')
+    all_data = FileReader.read_files('/../res/data/training_set/', '*.txt')
     data = []
 
     for file_data in all_data:
-        time_array = np.linspace(0, file_data[1] * (file_data[0] / 1000), num=file_data[1])
+        time_array = np.linspace(0, file_data[1] * (file_data[0] / 1000.0), num=file_data[1])
         data.append([file_data[2], file_data[3], file_data[4], file_data[5], time_array])
 
     res = dict()
@@ -59,11 +59,12 @@ if __name__ == '__main__':
         for i in range(len(scores)):
             if scores[i] >= 1:
                 fall_pos = i
-                fall_time = i / 100.0  # d[4][i]
+                fall_time = d[4][i]
                 break
-        key = d[3][5:-4]
-        print key, "fall_pos: ", fall_pos,  " fall_time: ", fall_time
+        key = d[3][13:-4]
         truth_val = truth.get(key)
+        print key, "fall_pos: ", fall_pos,  " fall_time: ", fall_time, " truth_val: ", truth_val, " key: ", key
+
         if fall_time == -1 and truth_val is None:
             res[key] = 'TN'
             TN_count += 1
@@ -74,11 +75,7 @@ if __name__ == '__main__':
             res[key] = 'FP'
             FP_count += 1
         if fall_time != -1 and truth_val is not None:
-            low = truth_val[0]
-            high = truth_val[1]
-            if high == -1:
-                high = len(scores) / 100.0
-            if low <= fall_time <= high:
+            if truth_val[0] <= fall_time <= truth_val[1]:
                 res[key] = 'TP'
                 TP_count += 1
             else:

@@ -5,7 +5,7 @@ import model
 
 
 if __name__ == '__main__':
-    all_data = FileReader.read_files('/../res/data/', 'throwing*.txt')
+    all_data = FileReader.read_files('/../res/data/training_set/', 'throw_*.txt')
 
     min_counts = []
     data = []
