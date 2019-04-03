@@ -15,9 +15,9 @@ def read_files(path, file_name):
 
     all_data = []
 
-    for file in absolute_path:
-        start_index = file.rfind('/') + 1
-        with open(file) as file_data:
+    for f in absolute_path:
+        start_index = f.rfind('/') + 1
+        with open(f) as file_data:
             content = ''
             for line in file_data:
                 content += line
@@ -44,5 +44,5 @@ def read_files(path, file_name):
                     mag_data = np.zeros(3 * count).reshape([count, 3])
                     for i in range(0, count):
                         mag_data[i] = np.fromstring(lines[i + 1], sep=' ')
-            all_data.append([delay, count, acc_data, mag_data, gyro_data, file[start_index:len(file)]])
+            all_data.append([delay, count, acc_data, mag_data, gyro_data, f[start_index:len(f)]])
     return all_data
