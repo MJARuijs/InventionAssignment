@@ -1,5 +1,4 @@
 import numpy as np
-import scipy
 
 
 # A function which cuts a window out of the IMU data and returns it as three different matrices
@@ -43,7 +42,7 @@ def tumble_score(gyro):
 # param data - the IMU data to be analysed
 # param window_len - the size of the window used to determine the free fall and tumble scores
 # param until - the point in the data at which the algorithm should stop analysing
-# return - a list containing the score for each point in the data 
+# return - a list containing the score for each point in the data
 def process(data, window_len, until):
     res = []
     # initial zero padding
