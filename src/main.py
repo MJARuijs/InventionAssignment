@@ -24,7 +24,7 @@ if __name__ == '__main__':
     for d in data:
         Plotter.plot_triple(d[4], d[0], 'Acceleration ' + d[3])
         # Plotter.plot_triple(d[4], d[1], 'Magnetometer ' + d[3])
-        # Plotter.plot_triple(d[4], d[2], 'Gyroscope ' + d[3])
-        #
-        # scores = model.process(d, 5, len(d[0]))
-        # Plotter.plot_single(d[4], scores, 'scores ' + d[3])
+        Plotter.plot_triple(d[4], d[2], 'Gyroscope ' + d[3])
+
+        scores = model.process(d, 20, len(d[0]))
+        Plotter.plot_single(d[4], scores, 'scores ' + d[3])

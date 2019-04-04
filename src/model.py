@@ -9,9 +9,9 @@ import numpy as np
 # data
 def get_window(data, current, window_len):
     acc = data[0][current - window_len : current]
-    gyro = data[1][current - window_len: current]
-    mag = data[2][current - window_len: current]
-    return acc, gyro, mag
+    mag = data[1][current - window_len: current]
+    gyro = data[2][current - window_len: current]
+    return acc, mag, gyro
 
 
 # A function which determines the share of free falling data points from a window of accelerometer data
@@ -32,7 +32,7 @@ def free_fall_score(acc):
 def tumble_score(gyro):
     score = 0.0
     for v in gyro:
-        if np.linalg.norm(v) > 1:
+        if np.linalg.norm(v) > 2:
             score += 1
     return score / len(gyro)
 
@@ -50,8 +50,8 @@ def process(data, window_len, until):
         res[i] = 0
     # determining the score for each window
     for i in range(window_len, until, 1):
-        acc, gyro, mag = get_window(data, i, window_len)
-        res[i] = free_fall_score(acc) * tumble_score(gyro)
+        acc, mag, gyro = get_window(data, i, window_len)
+        res[i] = free_fall_score(acc) + tumble_score(gyro)
     return res
 
 

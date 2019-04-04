@@ -53,7 +53,7 @@ if __name__ == '__main__':
     FN_count = 0
 
     for d in data:
-        scores = model.process(d, 5, len(d[0]))
+        scores = model.process(d, 20, len(d[0]))
         fall_pos = -1
         fall_time = -1
         for i in range(len(scores)):
