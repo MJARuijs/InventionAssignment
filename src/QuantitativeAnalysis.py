@@ -66,11 +66,8 @@ if __name__ == '__main__':
                 fall_pos = i
                 fall_time = d[4][i]
                 break
-        key = ''
-        if set == 'test':
-            key = d[3][9:-4]
-        else:
-            key = d[3][13:-4]
+
+        key = d[3][:-4]
         truth_val = truth.get(key)
         print key, ": fall_pos: ", fall_pos,  " fall_time: ", fall_time, " truth_val: ", truth_val
 
