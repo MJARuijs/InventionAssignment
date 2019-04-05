@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import FileReader
 import Model
@@ -37,11 +38,17 @@ truth = {
     'throwing_up+catching_9': (0.25, 0.52)
 }
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-t', help='Type of run you want to perform. Can be either \'training\' or \'test\'')
+args = parser.parse_args()
 
 if __name__ == '__main__':
 
-    set = 'training'
-    all_data = FileReader.read_files('/../res/data/'+set+'_set/', '*.txt')
+    if args.t is None:
+        print('-t parameter is missing!')
+        exit(1)
+
+    all_data = FileReader.read_files('/../res/data/' + str(args.t) + '_set/', '*.txt')
     data = []
 
     # For each file, append the data to the numpy array,
