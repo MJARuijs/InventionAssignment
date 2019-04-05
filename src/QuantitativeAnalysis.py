@@ -70,8 +70,8 @@ if __name__ == '__main__':
         key = d[3][:-4]
 
         if '\\' in key:
-            delimeter_index = key.index('\\')
-            key = key[delimeter_index, :]
+            delimiter_index = key.index('\\')
+            key = key[delimiter_index, :]
 
         truth_val = truth.get(key)
         print key, ": fall_pos: ", fall_pos,  " fall_time: ", fall_time, " truth_val: ", truth_val
