@@ -21,7 +21,7 @@ def get_window(data, current, window_len):
 def free_fall_score(acc):
     score = 0.0
     for v in acc:
-        if np.linalg.norm(v) < 0.5:
+        if np.linalg.norm(v) < 0.7:
             score += 1
     return score / len(acc)
 
@@ -32,7 +32,7 @@ def free_fall_score(acc):
 def tumble_score(gyro):
     score = 0.0
     for v in gyro:
-        if np.linalg.norm(v) > 2:
+        if np.linalg.norm(v) > 1:
             score += 1
     return score / len(gyro)
 
@@ -51,7 +51,7 @@ def process(data, window_len, until):
     # determining the score for each window
     for i in range(window_len, until, 1):
         acc, mag, gyro = get_window(data, i, window_len)
-        res[i] = free_fall_score(acc) + tumble_score(gyro)
+        res[i] = free_fall_score(acc) * tumble_score(gyro)
     return res
 
 

@@ -39,7 +39,8 @@ truth = {
 
 if __name__ == '__main__':
 
-    all_data = FileReader.read_files('/../res/data/training_set/', '*.txt')
+    set = 'training'
+    all_data = FileReader.read_files('/../res/data/'+set+'_set/', '*.txt')
     data = []
 
     for file_data in all_data:
@@ -53,7 +54,7 @@ if __name__ == '__main__':
     FN_count = 0
 
     for d in data:
-        scores = model.process(d, 20, len(d[0]))
+        scores = model.process(d, 5, len(d[0]))
         fall_pos = -1
         fall_time = -1
         for i in range(len(scores)):
@@ -61,9 +62,13 @@ if __name__ == '__main__':
                 fall_pos = i
                 fall_time = d[4][i]
                 break
-        key = d[3][13:-4]
+        key = ''
+        if set == 'test':
+            key = d[3][9:-4]
+        else:
+            key = d[3][13:-4]
         truth_val = truth.get(key)
-        print key, "fall_pos: ", fall_pos,  " fall_time: ", fall_time, " truth_val: ", truth_val, " key: ", key
+        print key, ": fall_pos: ", fall_pos,  " fall_time: ", fall_time, " truth_val: ", truth_val
 
         if fall_time == -1 and truth_val is None:
             res[key] = 'TN'
