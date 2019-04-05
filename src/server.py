@@ -1,17 +1,29 @@
+import argparse
 import re
 import socket
 import numpy as np
 import FileWriter
 import Plotter
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', help='Port of the server', default=8081)
+args = parser.parse_args()
 
 if __name__ == '__main__':
-    port = 8081
+    port = int(args.p)
+
+    # Ping Google's servers in order to find our IP address
+    ip_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    ip_socket.connect(('8.8.8.8', 10002))
+    address = ip_socket.getsockname()[0]
+    ip_socket.close()
+
+    print('Address is: %s' % address)
 
     # Initialize server
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind(('192.168.178.18', port))
+    s.bind((address, port))
     s.listen(1)
 
     delay = 0
@@ -143,6 +155,8 @@ if __name__ == '__main__':
 
                 if gyroscope_count is not 0:
                     Plotter.plot(time_array, gyroscope_data, 'Gyroscope')
+
+                Plotter.show()
 
             except UnicodeDecodeError:
                 print('Unicode error..')
