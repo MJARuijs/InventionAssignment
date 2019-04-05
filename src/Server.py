@@ -148,13 +148,13 @@ if __name__ == '__main__':
 
                 # Plot the data, assuming it exists
                 if acceleration_count is not 0:
-                    Plotter.plot(time_array, acceleration_data, 'Acceleration')
+                    Plotter.plot_triple(time_array, acceleration_data, 'Acceleration')
 
                 if magnetometer_count is not 0:
-                    Plotter.plot(time_array, magnetometer_data, 'Magnetometer')
+                    Plotter.plot_triple(time_array, magnetometer_data, 'Magnetometer')
 
                 if gyroscope_count is not 0:
-                    Plotter.plot(time_array, gyroscope_data, 'Gyroscope')
+                    Plotter.plot_triple(time_array, gyroscope_data, 'Gyroscope')
 
                 Plotter.show()
 
