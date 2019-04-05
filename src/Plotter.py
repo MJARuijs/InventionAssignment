@@ -12,6 +12,7 @@ def plot_triple(xs, ys, title):
     axis.legend(loc=5, bbox_to_anchor=(1.15, 0.92))
     figure.show()
 
+
 def plot_single(xs, ys, title):
     figure, axis = pl.subplots()
     axis.set_title(title)
@@ -20,3 +21,7 @@ def plot_single(xs, ys, title):
     pl.ylabel('magnitude')
     axis.legend(loc=5, bbox_to_anchor=(1.15, 0.92))
     figure.show()
+
+
+def show():
+    pl.show()

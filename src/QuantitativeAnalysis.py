@@ -1,6 +1,6 @@
 import numpy as np
 import FileReader
-import model
+import Model
 
 
 # The ground truth with all the correct windows in which the device is falling
@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     # For each data snippet, check if it triggers in the correct window
     for d in data:
-        scores = model.process(d, 5, len(d[0]))
+        scores = Model.process(d, 5, len(d[0]))
         fall_pos = -1
         fall_time = -1
         for i in range(len(scores)):

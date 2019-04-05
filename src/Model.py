@@ -8,7 +8,7 @@ import numpy as np
 # return - A tuple containing three matrices of equal size containing the accelerometer, gyroscope, and magnetometer
 # data
 def get_window(data, current, window_len):
-    acc = data[0][current - window_len : current]
+    acc = data[0][current - window_len: current]
     mag = data[1][current - window_len: current]
     gyro = data[2][current - window_len: current]
     return acc, mag, gyro
@@ -53,7 +53,3 @@ def process(data, window_len, until):
         acc, mag, gyro = get_window(data, i, window_len)
         res[i] = free_fall_score(acc) * tumble_score(gyro)
     return res
-
-
-
-
