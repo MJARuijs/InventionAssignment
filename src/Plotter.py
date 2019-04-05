@@ -11,3 +11,7 @@ def plot(xs, ys, title):
     pl.ylabel('magnitude')
     axis.legend(loc=5, bbox_to_anchor=(1.15, 0.92))
     figure.show()
+
+
+def show():
+    pl.show()
